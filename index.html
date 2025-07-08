@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Educator Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'academic': ['Georgia', 'Times New Roman', 'serif'],
+                        'sans-academic': ['Source Sans Pro', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans-academic text-gray-800">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-8 py-12">
+            <h1 class="text-4xl font-academic font-normal text-gray-900 text-center">
+                LLM Educator Training
+            </h1>
+            <div class="w-16 h-px bg-gray-400 mx-auto mt-4"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-8 py-16">
+        <!-- Introduction Section -->
+        <section class="mb-16">
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-8">Course Overview</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    In today's fast-paced world, Large Language Models (LLMs) are becoming increasingly prevalent. However, educators are struggling to maintain an understanding of the technology; meanwhile, student use is drastically increasing. This tool endeavors to give guidance to educators on the optimal use of LLMs in the classroom.
+                </p>
+            </div>
+        </section>
+
+        <!-- Course Modules -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-academic font-normal text-gray-900 mb-12 text-center">Course Modules</h2>
+            
+            <div class="space-y-8">
+                <!-- Module 1 -->
+                <div class="bg-white border border-gray-200 p-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gray-800 text-white flex items-center justify-center text-lg font-medium">
+                                I
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-medium text-gray-900 mb-3">LLM Selection</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                The first module will explain how to select the optimal LLM for a given educational task.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="bg-white border border-gray-200 p-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gray-800 text-white flex items-center justify-center text-lg font-medium">
+                                II
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-medium text-gray-900 mb-3">Prompt Engineering</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                The second module will introduce prompt engineering techniques, including chain-of-thought prompting and emotion prompting.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="bg-white border border-gray-200 p-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gray-800 text-white flex items-center justify-center text-lg font-medium">
+                                III
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-medium text-gray-900 mb-3">Hallucination Detection</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                The final module will provide techniques for detecting hallucination in LLM responses.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Objectives -->
+        <section class="mb-16">
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-8">Learning Objectives</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                    Pedagogically, this module aims to provide teachers with the ability to confidently use LLMs to enhance their lessons and teaching practices.
+                </p>
+                
+                <div class="bg-gray-50 border-l-4 border-gray-800 p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-6">Upon completion of this three-part module, educators should be able to:</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <span class="flex-shrink-0 w-2 h-2 bg-gray-800 rounded-full mt-3"></span>
+                            <p class="text-gray-700">Determine the optimal LLM to use for a given educational application</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <span class="flex-shrink-0 w-2 h-2 bg-gray-800 rounded-full mt-3"></span>
+                            <p class="text-gray-700">Create ideal prompts to achieve educational goals</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <span class="flex-shrink-0 w-2 h-2 bg-gray-800 rounded-full mt-3"></span>
+                            <p class="text-gray-700">Evaluate response accuracy of LLMs to avoid hallucination</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Methodology -->
+        <section>
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-8">Course Methodology</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                    This mini-course will follow the flow of proper use of LLMs. First, one must select the appropriate model for their task. Once a model is chosen, one must learn how to properly communicate with the LLM using prompt engineering. Finally, once a response is received, it is essential to learn to differentiate true information from hallucinations.
+                </p>
+                
+                <!-- Sequential Steps -->
+                <div class="grid md:grid-cols-3 gap-8 mt-8">
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-gray-100 border-2 border-gray-300 mx-auto flex items-center justify-center">
+                                <span class="text-2xl font-academic text-gray-700">1</span>
+                            </div>
+                        </div>
+                        <h4 class="font-medium text-gray-900 mb-2">Model Selection</h4>
+                        <p class="text-sm text-gray-600">Choose the appropriate LLM for the educational task</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-gray-100 border-2 border-gray-300 mx-auto flex items-center justify-center">
+                                <span class="text-2xl font-academic text-gray-700">2</span>
+                            </div>
+                        </div>
+                        <h4 class="font-medium text-gray-900 mb-2">Prompt Engineering</h4>
+                        <p class="text-sm text-gray-600">Develop effective communication strategies</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-gray-100 border-2 border-gray-300 mx-auto flex items-center justify-center">
+                                <span class="text-2xl font-academic text-gray-700">3</span>
+                            </div>
+                        </div>
+                        <h4 class="font-medium text-gray-900 mb-2">Response Evaluation</h4>
+                        <p class="text-sm text-gray-600">Distinguish accurate information from hallucinations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-5xl mx-auto px-8 py-8">
+            <p class="text-center text-gray-600 text-sm">
+                LLM Educator Training • Professional Development in Artificial Intelligence
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
