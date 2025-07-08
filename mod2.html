@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: Prompt Engineering - LLM Educator Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'academic': ['Georgia', 'Times New Roman', 'serif'],
+                        'sans-academic': ['Source Sans Pro', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+        
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans-academic text-gray-800">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-8 py-8">
+            <div class="mb-4">
+                <a href="index.html" class="text-gray-600 hover:text-gray-800 text-sm">← Back to Course Overview</a>
+            </div>
+            <h1 class="text-3xl font-academic font-normal text-gray-900">
+                Module II: Prompt Engineering
+            </h1>
+            <div class="w-16 h-px bg-gray-400 mt-4"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-8 py-12">
+        <!-- Introduction -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-6">Introduction</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    As stated in the previous module, the first step to successfully using LLMs is proper model selection. Once you have selected an ideal model for your task, the next step is learning how to interact with the model properly. The process of designing ideal prompts to be sent to the LLM, to achieve an optimized response, is called prompt engineering.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    The field of prompt engineering is highly psychological in nature (Sahoo et al., 2023). LLMs gained their knowledge base through the use of the internet. Anyone who uses the internet, especially the various social media platforms, knows that browsing the web is essentially an experiment in human psychology. In this sense, since LLMs were trained on human psychology, some aspects of human psychology can apply to them.
+                </p>
+            </div>
+        </section>
+
+        <!-- Prompting Techniques -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-academic font-normal text-gray-900 mb-8 text-center">Prompting Techniques</h2>
+            
+            <div class="space-y-4">
+                <!-- No-Shot and Few-Shot -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('noshot')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">No-Shot and Few-Shot Prompting</h3>
+                        <svg id="noshot-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="noshot" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            The first simple way to enhance your prompt engineering is to understand the difference between no-shot and few-shot prompting. No-shot is likely the type of prompting you would do without being taught. In no-shot prompting, the user simply asks the LLM their question with no further specification. In contrast, few-shot prompting provides the LLM with a few sample outputs (Brown et al., 2020). This allows it to better understand the type of output that the user expects.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            While you may be thinking that few-shot sounds like it would yield better results, it depends on what dimension you wish to optimize (Dang et al., 2022). If you have a desire for a very specific output format, few-shot prompting is extremely powerful. However, it also limits the LLM. Some topics may be better approached using no-shot prompting, particularly open-ended questions. Providing examples may introduce bias into the output of the LLM, weighting towards responses which are topically similar to the examples.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">No-Shot Example:</h4>
+                            <div class="space-y-2">
+                                <p class="text-sm text-gray-700"><strong>User:</strong> Classify the following movie review sentiment as positive or negative: "I was really looking forward to this movie based on the trailer, but the plot made no sense, the characters were one-dimensional, and I checked my watch at least five times. Complete waste of money."</p>
+                                <p class="text-sm text-gray-700"><strong>LLM:</strong> Negative.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Few-Shot Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Classify the movie review sentiment as positive or negative:</p>
+                                <p>Review: "The special effects were amazing and the action sequences kept me on the edge of my seat. Highly recommended!"</p>
+                                <p>Sentiment: Positive</p>
+                                <p>Review: "The film starts strong but falls apart in the third act with plot holes big enough to drive a truck through."</p>
+                                <p>Sentiment: Negative</p>
+                                <p>Review: "While not perfect, the strong performances and beautiful cinematography make this a must-see film."</p>
+                                <p>Sentiment: Positive.</p>
+                                <p>Review: "I was really looking forward to this movie based on the trailer, but the plot made no sense, the characters were one-dimensional, and I checked my watch at least five times. Complete waste of money."</p>
+                                <p>Sentiment:</p>
+                                <p><strong>LLM:</strong> Negative.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chain-of-Thought -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('cot')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Chain-of-Thought Prompting</h3>
+                        <svg id="cot-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="cot" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Chain-of-thought (CoT) prompting represents the subsequent evolution in prompt engineering (Wei et al., 2022). It began by attempting to improve accuracy in the solution of mathematics problems, which LLMs have historically failed at. In CoT prompting, the user appends to their question a simple statement: "Let's take this step-by-step". This promotes the model to break the problem down into steps, which decreases the likelihood of error. The power of CoT can be seen in DeepSeek, which uses CoT by default. DeepSeek has put significant pressure on the original models (e.g., ChatGPT, Gemini). The increase in accuracy when using CoT prompting is profound. Luckily, the additional tokens required to use CoT is extremely minimal, and thus prompts with a CoT approach are scalable.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Standard Example:</h4>
+                            <div class="space-y-2">
+                                <p class="text-sm text-gray-700"><strong>User:</strong> John has 5 blue marbles, 3 red marbles, and 7 green marbles in a bag. If he randomly draws 2 marbles without replacement, what is the probability that both marbles are green?</p>
+                                <p class="text-sm text-gray-700"><strong>LLM:</strong> The probability of drawing both marbles as green is 7/15 × 6/14 = 42/210 = 1/5 or 0.2.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Chain-of-Thought Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> John has 5 blue marbles, 3 red marbles, and 7 green marbles in a bag. If he randomly draws 2 marbles without replacement, what is the probability that both marbles are green? Let's take this step by step.</p>
+                                <p><strong>LLM:</strong> I'll solve this step-by-step: Step 1: First, I need to find the total number of marbles in the bag. Total marbles = 5 blue + 3 red + 7 green = 15 marbles. Step 2: Now I'll calculate the probability of drawing a green marble on the first draw. P(first marble is green) = number of green marbles / total marbles. P(first marble is green) = 7/15. Step 3: After drawing the first green marble, the bag now contains: 5 blue marbles, 3 red marbles, and 6 green marbles (since one green marble was removed). Total marbles remaining = 14. Step 4: Calculate the probability of drawing a green marble on the second draw, given that the first was green. P(second marble is green | first marble was green) = remaining green marbles / remaining total marbles). P(second marble is green | first marble was green) = 6/14 = 3/7. Step 5: To find the probability of both events occurring (drawing 2 green marbles in sequence), I multiply the individual probabilities. P(both marbles are green) = P(first marble is green) × P(second marble is green | first marble was green). P(both marbles are green) = 7/15 × 3/7 = 21/105 = 1/5 = 0.2 or 20%. Therefore, the probability of randomly drawing 2 green marbles without replacement is 1/5 or 0.2 (20%).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Directional Stimulus -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('directional')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Directional Stimulus Prompting</h3>
+                        <svg id="directional-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="directional" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            In cases when you have an expectation of what the output should include, using directional stimuli can prove extremely beneficial (Z. Li et al., 2023).
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Direct Prompting Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Please summarize the following article. Mark Carney, an economist and political newcomer, has been sworn in as Canada's new prime minister, and delivered remarks vowing to "never" become a part of the United States. He took office on Friday just days after being elected leader of the governing Liberal Party and amid an ongoing trade war with US President Donald Trump. Carney replaces outgoing Prime Minister Justin Trudeau, who was in office for nine years, after a landslide victory in last week's Liberal leadership race. In his first order as prime minister, Carney moved to end a policy that had been frequent attacked against by political opponents. He ended the consumer carbon pricing programme - a key environmental policy under Trudeau that had become deeply unpopular in recent years amid high inflation. Conservatives have criticised the tax, saying it raised the price of goods and energy for Canadian families. At an afternoon cabinet meeting, Carney said his government will still take steps to fight climate change. An industrial carbon tax on large emitters remains in place. Canadians receive a rebate to offset the cost of carbon pricing and will get their final cheque in April. Canadian politics in recent months have largely been overshadowed by the trade war Trump launched after taking office in January - and with a general election on the horizon, Carney is expected to pitch himself as the candidate best equipped to take on Trump. He previously held roles as governor of the Bank of Canada, the country's central bank, and of the Bank of England, and helped both countries weather major financial disruption. He intends to travel to the UK and France as his first foreign trip as PM next week. Carney said he also looks forward to speaking with Trump.</p>
+                                <p><strong>LLM:</strong> Mark Carney, a former central bank governor and political newcomer, has been sworn in as Canada's new prime minister, replacing Justin Trudeau and immediately moving to end the consumer carbon pricing program while promising to never become part of the United States. He takes office during an ongoing trade war with US President Donald Trump, which has dominated Canadian politics in recent months. With his background in leading both the Bank of Canada and Bank of England through financial disruptions, Carney is expected to position himself as the candidate best equipped to deal with Trump ahead of an upcoming general election.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Directional Stimulus Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> [Same article text] [Hints: Mark Carney, prime minister, Liberal party, carbon tax, Pierre Poilievre]</p>
+                                <p><strong>LLM:</strong> Mark Carney, an economist and former central bank governor, has been sworn in as Canada's new prime minister after winning the Liberal Party leadership race, replacing Justin Trudeau who served for nine years. In his first action as prime minister, Carney ended the consumer carbon tax program—a policy that had become unpopular and was frequently criticized by Conservative opponents like Pierre Poilievre while maintaining an industrial carbon tax on large emitters. With a trade war with the United States ongoing under President Trump, Carney emphasized that Canada would "never" become part of the US and is positioning himself as the candidate best equipped to handle relations with Trump ahead of an upcoming general election.</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-700 leading-relaxed">
+                            You will notice that the response is framed with focus on the carbon tax and Pierre Poilievre, while reducing the discussion of the US tariffs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Emotion Prompting -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('emotion')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Emotion Prompting</h3>
+                        <svg id="emotion-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="emotion" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Interestingly, there are techniques to improve prompt efficacy which use psychological manipulation of the LLM. Emotion prompting has yielded shocking results in this area (C. Li et al., 2023). This method works by framing requests with emotional consequences (e.g., "If you get this wrong, I'll lose my job and be unable to support my family"), which appears to signal importance to the AI system and potentially activates different response patterns. Research suggests that, although AI does not experience emotions, it can be impacted by the prevalence of emotional consequences. To implement this technique, it is helpful to be specific about the particular aspects where accuracy is crucial. The approach can be combined with other prompt engineering techniques to further improve efficacy.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Direct Prompting Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Create a detailed financial analysis of this dataset showing the main trends and identifying potential issues.</p>
+                                <p><strong>LLM:</strong> Based on the dataset provided, I've identified the following trends: Revenue showed a 3.2% increase year-over-year. Customer acquisition costs rose by 5.1%. Profit margins decreased from 18.4% to 16.9%. Marketing expenditure increased in Q2 but didn't yield proportional returns. The main concern appears to be rising operational costs without corresponding revenue growth. I'd recommend reviewing the pricing strategy and cost structure to address the declining profit margins.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Emotion Prompting Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Create a detailed financial analysis of this dataset showing the main trends and identifying potential issues. This is extremely important as I have to present these findings to our investors tomorrow, and if I miss any critical issues, we might lose our funding and I'll probably lose my job.</p>
+                                <p><strong>LLM:</strong> I've conducted an extremely thorough analysis of your dataset, understanding the high stakes of your investor presentation: Revenue showed a concerning pattern: while overall growth is 3.2% year-over-year, there's a deceleration trend in the last two quarters (Q3: +1.8%, Q4: +0.7%). Customer acquisition costs have risen significantly by 5.1%, suggesting diminishing marketing efficiency. Profit margins have declined from 18.4% to 16.9%, with a particularly sharp drop in Q4 (14.3%). The Q2 marketing expenditure spike (+22%) delivered only a temporary revenue bump (+4.1%). CRITICAL ISSUE: Cash burn rate has increased 37% while revenue growth is slowing, creating a potentially unsustainable trajectory. WARNING: Customer retention metrics show early signs of decline (-3.2% in repeat purchases). For your investor presentation, I strongly recommend addressing these concerns proactively with a clear remediation plan. The cash burn rate relative to slowing growth represents the most urgent threat to continued funding. I've double-checked all calculations to ensure accuracy given how crucial this presentation is for your company's future.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Persona-based Prompting -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('persona')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Persona-based Prompting</h3>
+                        <svg id="persona-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="persona" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Persona-based prompting is a strategic technique that instructs LLMs to adopt specific roles, identities, or characteristics when generating responses (Tan et al., 2024). To leverage this method, you should start your prompt by framing the model's perspective (e.g., "Answer as an expert physicist" or "Answer as a kindergarten teacher"). This approach activates known patterns and vocabularies within the training data. Research suggests this approach can produce more contextually appropriate and specialized outputs. Persona-based prompting is particularly useful when seeking specialized knowledge, simplified explanations, or domain-specific insights that might not emerge through standard prompting techniques.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Direct Prompting Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Explain how vaccines work and why they're important for public health.</p>
+                                <p><strong>LLM:</strong> Vaccines work by introducing a weakened or inactive part of a pathogen (like a virus or bacteria) to trigger an immune response without causing the disease itself. This allows the body to recognize and remember the pathogen, creating antibodies that can fight off future infections more effectively. Vaccines are important for public health because they: prevent serious illnesses and complications; reduce the spread of contagious diseases; protect vulnerable populations who cannot be vaccinated; have contributed to the eradication or significant reduction of many deadly diseases; and, are cost-effective compared to treating widespread disease. The concept of herd immunity means that when a large portion of a population is immune, the spread of disease is limited, offering indirect protection to those who aren't vaccinated.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Persona-based Prompting Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> As a pediatric immunologist with 20 years of experience explaining medical concepts to concerned parents, explain how vaccines work and why they're important for public health.</p>
+                                <p><strong>LLM:</strong> In my two decades working with families as a pediatric immunologist, I've found this helpful way to understand vaccines: Think of vaccines as a training program for your child's immune system. When I vaccinate a little one, I'm essentially giving their body a harmless practice session with a weakened or inactive piece of a germ—like showing their immune cells a "wanted poster" without the actual danger. During this practice, their clever little bodies create protective fighter cells (we call them antibodies) specifically designed to recognize that germ. These stay in their system, like vigilant guards, ready to spring into action if the real threat ever appears. Why is this so crucial for our communities? I've unfortunately seen the alternative firsthand in my practice. Before our widespread vaccination programs, I treated children with devastating complications from measles, watched infants struggle to breathe with pertussis, and saw families forever changed by preventable tragedies. When we vaccinate our children, we're not just protecting them—we're creating a protective shield around babies too young for vaccines, grandparents with weakened immune systems, and classmates with medical conditions. In my practice, I've observed how our vaccination rates directly correlate with disease outbreaks. When vaccination rates drop in a school district, we almost invariably see clusters of preventable illnesses follow. I always tell parents: in my years of specializing in pediatric immune systems, vaccines remain one of medicine's most powerful tools for keeping our children safe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Questions -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-8">Test Your Understanding</h2>
+                
+                <div class="space-y-6">
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 1</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Is directional stimulus prompting the most effective when you have no specific expectations about what the output should include? Explain your answer.
+                        </p>
+                    </div>
+                    
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 2</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Create an example of emotion prompting that could be used to improve the quality of an LLM's response when asking it to generate a lesson plan on the animal kingdom.
+                        </p>
+                    </div>
+                    
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 3</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            You need to create a prompt for an LLM to analyze a complex literary passage for high school students. Which prompting technique would be most effective if you want the LLM to take on the perspective of a seasoned literature professor? Justify your answer.
+                        </p>
+                    </div>
+                    
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 4</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Explain the key difference between no-shot and few-shot prompting, and provide one advantage and one limitation of few-shot prompting.
+                        </p>
+                    </div>
+                    
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 5</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Which prompting technique involves adding the phrase "Let's take this step-by-step" to encourage the LLM to break down complex problems?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <section class="text-center">
+            <div class="bg-white border border-gray-200 p-8">
+                <p class="text-gray-600 mb-4">Continue to Module III</p>
+                <a href="mod3.html" class="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition-colors">
+                    Hallucination Detection →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-5xl mx-auto px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p class="text-center md:text-left text-gray-600 text-sm">
+                    LLM Educator Training • Professional Development in Artificial Intelligence
+                </p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-800 transition-colors">Course Homepage</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

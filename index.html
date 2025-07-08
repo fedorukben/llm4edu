@@ -47,52 +47,61 @@
             
             <div class="space-y-8">
                 <!-- Module 1 -->
-                <div class="bg-white border border-gray-200 p-8">
+                <div class="bg-white border border-gray-200 p-8 hover:shadow-lg transition-shadow duration-300">
                     <div class="flex items-start space-x-6">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-gray-800 text-white flex items-center justify-center text-lg font-medium">
                                 I
                             </div>
                         </div>
-                        <div>
+                        <div class="flex-grow">
                             <h3 class="text-xl font-medium text-gray-900 mb-3">LLM Selection</h3>
-                            <p class="text-gray-700 leading-relaxed">
+                            <p class="text-gray-700 leading-relaxed mb-4">
                                 The first module will explain how to select the optimal LLM for a given educational task.
                             </p>
+                            <a href="mod1.html" class="inline-block bg-gray-800 text-white px-6 py-2 text-sm hover:bg-gray-700 transition-colors">
+                                Start Module I →
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Module 2 -->
-                <div class="bg-white border border-gray-200 p-8">
+                <div class="bg-white border border-gray-200 p-8 hover:shadow-lg transition-shadow duration-300">
                     <div class="flex items-start space-x-6">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-gray-800 text-white flex items-center justify-center text-lg font-medium">
                                 II
                             </div>
                         </div>
-                        <div>
+                        <div class="flex-grow">
                             <h3 class="text-xl font-medium text-gray-900 mb-3">Prompt Engineering</h3>
-                            <p class="text-gray-700 leading-relaxed">
+                            <p class="text-gray-700 leading-relaxed mb-4">
                                 The second module will introduce prompt engineering techniques, including chain-of-thought prompting and emotion prompting.
                             </p>
+                            <a href="mod2.html" class="inline-block bg-gray-800 text-white px-6 py-2 text-sm hover:bg-gray-700 transition-colors">
+                                Start Module II →
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Module 3 -->
-                <div class="bg-white border border-gray-200 p-8">
+                <div class="bg-white border border-gray-200 p-8 hover:shadow-lg transition-shadow duration-300">
                     <div class="flex items-start space-x-6">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-gray-800 text-white flex items-center justify-center text-lg font-medium">
                                 III
                             </div>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-medium text-gray-900 mb-3">Hallucination Detection</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                The final module will provide techniques for detecting hallucination in LLM responses.
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-medium text-gray-900 mb-3">Hallucination Detection and Ethics</h3>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                The final module will provide techniques for detecting hallucination in LLM responses and address ethical considerations in educational AI use.
                             </p>
+                            <a href="mod3.html" class="inline-block bg-gray-800 text-white px-6 py-2 text-sm hover:bg-gray-700 transition-colors">
+                                Start Module III →
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -128,7 +137,7 @@
         </section>
 
         <!-- Course Methodology -->
-        <section>
+        <section class="mb-16">
             <div class="bg-white border border-gray-200 p-10">
                 <h2 class="text-2xl font-academic font-normal text-gray-900 mb-8">Course Methodology</h2>
                 <p class="text-lg text-gray-700 leading-relaxed mb-8">
@@ -144,7 +153,8 @@
                             </div>
                         </div>
                         <h4 class="font-medium text-gray-900 mb-2">Model Selection</h4>
-                        <p class="text-sm text-gray-600">Choose the appropriate LLM for the educational task</p>
+                        <p class="text-sm text-gray-600 mb-3">Choose the appropriate LLM for the educational task</p>
+                        <a href="mod1.html" class="text-sm text-gray-600 hover:text-gray-800 underline">View Module I</a>
                     </div>
                     
                     <div class="text-center">
@@ -154,7 +164,8 @@
                             </div>
                         </div>
                         <h4 class="font-medium text-gray-900 mb-2">Prompt Engineering</h4>
-                        <p class="text-sm text-gray-600">Develop effective communication strategies</p>
+                        <p class="text-sm text-gray-600 mb-3">Develop effective communication strategies</p>
+                        <a href="mod2.html" class="text-sm text-gray-600 hover:text-gray-800 underline">View Module II</a>
                     </div>
                     
                     <div class="text-center">
@@ -164,9 +175,23 @@
                             </div>
                         </div>
                         <h4 class="font-medium text-gray-900 mb-2">Response Evaluation</h4>
-                        <p class="text-sm text-gray-600">Distinguish accurate information from hallucinations</p>
+                        <p class="text-sm text-gray-600 mb-3">Distinguish accurate information from hallucinations</p>
+                        <a href="mod3.html" class="text-sm text-gray-600 hover:text-gray-800 underline">View Module III</a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Quick Start -->
+        <section>
+            <div class="bg-white border border-gray-200 p-10 text-center">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-6">Ready to Begin?</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                    Start with Module I to learn how to select the right LLM for your educational needs.
+                </p>
+                <a href="mod1.html" class="inline-block bg-gray-800 text-white px-10 py-4 text-lg hover:bg-gray-700 transition-colors">
+                    Begin Course →
+                </a>
             </div>
         </section>
     </main>
@@ -174,9 +199,14 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-200 mt-16">
         <div class="max-w-5xl mx-auto px-8 py-8">
-            <p class="text-center text-gray-600 text-sm">
-                LLM Educator Training • Professional Development in Artificial Intelligence
-            </p>
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p class="text-center md:text-left text-gray-600 text-sm">
+                    LLM Educator Training • Professional Development in Artificial Intelligence
+                </p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="about.html" class="text-gray-600 hover:text-gray-800 transition-colors">About the Designers</a>
+                </div>
+            </div>
         </div>
     </footer>
 </body>

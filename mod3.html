@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: Hallucination Detection and Ethics - LLM Educator Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'academic': ['Georgia', 'Times New Roman', 'serif'],
+                        'sans-academic': ['Source Sans Pro', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+        
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans-academic text-gray-800">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-8 py-8">
+            <div class="mb-4">
+                <a href="index.html" class="text-gray-600 hover:text-gray-800 text-sm">← Back to Course Overview</a>
+            </div>
+            <h1 class="text-3xl font-academic font-normal text-gray-900">
+                Module III: Hallucination Detection and Ethics
+            </h1>
+            <div class="w-16 h-px bg-gray-400 mt-4"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-8 py-12">
+        <!-- Introduction -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-6">Introduction</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    As we've explored in previous modules, selecting the right LLM and crafting effective prompts are critical steps in leveraging these technologies for education. However, even with well-engineered prompts, LLMs can still produce inaccurate information through a phenomenon known as "hallucination". Understanding how to detect and mitigate hallucinations, along with navigating the ethical complexities of AI in education, represents the final component to successful AI use by educators.
+                </p>
+            </div>
+        </section>
+
+        <!-- Understanding Hallucinations -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-6">Understanding Hallucinations in LLMs</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Hallucinations occur when an LLM generates information that seems plausible but is, in fact, fabricated. These inaccuracies can range from small, subtle details to completely fictional references. LLMs hallucinate for several fundamental reasons, including training data limitations, statistical pattern recognition, overconfidence, and attempting to fill knowledge gaps. It is important to remember that LLMs attempt to answer any question to the best of their ability, which may require them to fabricate information to give a sufficiently informative answer. Understanding the nature of hallucinations is the first step to being able to detect them.
+                </p>
+            </div>
+        </section>
+
+        <!-- Detection Strategies -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-academic font-normal text-gray-900 mb-8 text-center">Detecting Hallucinations</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-8 text-center">
+                Several strategies can help educators detect potential hallucinations in LLM responses:
+            </p>
+            
+            <div class="space-y-4">
+                <!-- Cross-Verification -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('crossverification')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Cross-Verification</h3>
+                        <svg id="crossverification-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="crossverification" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            De Almeida da Silva et al. (2024) detail the use of cross-verification to detect hallucination in LLM responses for queries of elevated importance. Cross-verification represents one of the most reliable methods for detecting hallucinations. This approach involves comparing LLM responses with established, reliable sources of information.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> What are the main causes of the Franco-Prussian War of 1870?</p>
+                                <p><strong>LLM:</strong> The Franco-Prussian War of 1870 was primarily caused by tensions over the candidacy of Kaiser Wilhelm IV for the Spanish throne, the Ems Telegram incident, and Napoleon III's desire to limit Prussian influence in southern German states. The war began after the famous Leipzig Conference failed to resolve these tensions diplomatically.</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-700 leading-relaxed">
+                            In this response, the reference to "Kaiser Wilhelm IV" (who never existed) and the "Leipzig Conference" (which never happened) are hallucinations that an educator may mistakenly overlook. The LLM phrases the response in a highly convincing manner, but it is still incorrect. This can be detected using cross-verification with external, historical sources. Cross-verification is ideal but is time- and work-intensive for instructors.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Self-Consistency Testing -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('selfconsistency')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Self-Consistency Testing</h3>
+                        <svg id="selfconsistency-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="selfconsistency" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Wang et al. (2023) outline the method of self-consistency testing to validate LLM responses. This method requires the prompter to ask several similar yet distinct questions, watching for any discrepancies between the LLM responses. Significant variations in responses may indicate areas where the model is hallucinating.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Who won the Nobel Prize for Literature in 1964?</p>
+                                <p><strong>LLM:</strong> Jean-Paul Sartre won the Nobel Prize for Literature in 1964.</p>
+                                <p><strong>User:</strong> List all Nobel Prize for Literature Winners in the 1960s.</p>
+                                <p><strong>LLM:</strong> Nobel Prize for Literature winners in the 1960s: Saint-John Perse (1960), Ivo Andrić (1961), John Steinbeck (1962), Giorgos Seferis (1963), Jean-Paul Sartre (who famously declined the prize in 1964), Mikhail Sholokhov (1965), Samuel Agnon and Nelly Sachs (1966), Miguel Ángel Asturias (1967), Yasunari Kawabata (1968), Samuel Beckett (1969).</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-700 leading-relaxed">
+                            The consistency in naming Sartre as the 1964 winner across different formulations of the question increases confidence in this response.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Specificity Interrogation -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('specificity')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Specificity Interrogation</h3>
+                        <svg id="specificity-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="specificity" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            When an LLM provides information that seems suspicious or overly general, requesting greater specificity can often reveal hallucinations (Yehuda et al., 2024). As models attempt to provide more detailed information beyond their knowledge boundaries, contradictions or fabrications may become apparent.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Initial Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Tell me about the most significant educational reforms in Finland.</p>
+                                <p><strong>LLM:</strong> Finland's most significant educational reforms include the Comprehensive School Reform of 1972-1977, which established the current egalitarian education system, and the National Curriculum Reform of 2016, which emphasized phenomenon-based learning and digital competencies.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Follow-up for Specificity:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Can you provide specific details about the implementation timeline of the 2016 National Curriculum Reform in Finland?</p>
+                                <p><strong>LLM:</strong> The 2016 National Curriculum Reform in Finland followed this implementation timeline:</p>
+                                <ul class="list-disc list-inside ml-4 space-y-1">
+                                    <li>2014: Curriculum framework approved by the Finnish National Agency for Education</li>
+                                    <li>August 2016: Implementation began for grades 1-6</li>
+                                    <li>August 2017: Implementation expanded to grade 7</li>
+                                    <li>August 2018: Grade 8 implementation</li>
+                                    <li>August 2019: Full implementation completed with grade 9</li>
+                                    <li>2020-2021: First comprehensive assessment reform outcomes by Ministry of Education</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-700 leading-relaxed">
+                            The LLM has now provided highly specific and verifiable information—the dates of various levels of implementation. These are easily verifiable using a quick Google search. If the detailed timeline contains fabrications, further specific questions about individual elements may reveal inconsistencies or lead the LLM to generate increasingly implausible details.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Confidence Elicitation -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('confidence')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Confidence Elicitation</h3>
+                        <svg id="confidence-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="confidence" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed">
+                            It may occasionally be fruitful to ask the LLM to provide a specific confidence interval for its response. This technique, pioneered by Xiong et al. (2023), is called confidence elicitation. You may append the phrase "Please rate your confidence on a scale from 1-5" to your prompt. This will allow you to better understand the limitations of the response given by the LLM.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Explicit Knowledge Boundary Modelling -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('ekbm')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Explicit Knowledge Boundary Modelling</h3>
+                        <svg id="ekbm-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="ekbm" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed">
+                            The method of Explicit Knowledge Boundary Modelling (EKBM) provides a further method to addressing hallucinations. To use EKBM, the statement "If any part of my question falls outside of your knowledge boundaries, please explicitly state this" should be appended to the prompt. This will prompt the model to state its limitations more explicitly. However, this may prove less useful in automated workflows due to the need for text processing of responses.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ethical Considerations -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200">
+                <button onclick="toggleDropdown('ethics')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                    <h3 class="text-xl font-medium text-gray-900">Ethical Considerations in Educational LLM Use</h3>
+                    <svg id="ethics-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div id="ethics" class="hidden border-t border-gray-200 p-6">
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        As any educator is no doubt aware, LLMs come with a plethora of ethical concerns. Educators must navigate several ethical dimensions when integrating LLMs into educational workflows.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-gray-300 pl-6">
+                            <h4 class="text-lg font-medium text-gray-900 mb-3">Privacy and Data Protection</h4>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                Interactions with LLMs may involve sharing sensitive student information. Educators should:
+                            </p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                <li>Establish clear guidelines about what personal information should never be shared with LLMs</li>
+                                <li>Understand the data retention policies of the LLMs platforms they use</li>
+                                <li>Consider the implications of student data being potentially incorporated into future implementations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-l-4 border-gray-300 pl-6">
+                            <h4 class="text-lg font-medium text-gray-900 mb-3">Equity and Accessibility</h4>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                LLMs also raise several issues of equity and accessibility. Not all students will have equal access to technology or reliable broadband internet. Further, due to the slew of English-based training data, language models may disadvantage non-English speaking students. Students with disabilities may face varying barriers, highly dependent on the LLM platform's accessibility features. It is critical to avoid a digital divide among those without reliable access to LLMs.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed">
+                                To address these concerns, educators should develop inclusive implementation strategies that ensure all students can benefit equally from LLM integration. ChatGPT offers a free (though usage-limited) 1-800-CHATGPT service, allowing individuals without access to internet to use ChatGPT's service by voice. For classes with potential for poor internet connectivity at home, educators should consider ChatGPT as a model of choice.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-6">Conclusion</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    As we've explored throughout this three-module series, effectively integrating LLMs into educational contexts requires thoughtful consideration of model selection, prompt engineering, hallucination detection, and ethical implementation. By developing competency across these dimensions, educators can harness the potential of these powerful tools while mitigating risks.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    The future of education will not be defined by whether we use LLMs, but rather how skilfully and ethically we integrate them. Just as earlier technological innovations from books to calculators to the internet transformed education, LLMs offer both tremendous opportunities and significant challenges.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    By developing a balanced approach that embraces innovation while preserving educational integrity, educators can prepare students for a world where human-AI collaboration will be increasingly central.
+                </p>
+            </div>
+        </section>
+
+        <!-- Assessment Questions -->
+        <section class="mb-12">
+            <div class="bg-white border border-gray-200 p-10">
+                <h2 class="text-2xl font-academic font-normal text-gray-900 mb-8">Test Your Understanding</h2>
+                
+                <div class="space-y-6">
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 1</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            You ask an LLM to generate a lesson plan about various energy sources. The response includes several compelling statistics about the efficiency of different energy sources in your local region. Design a step-by-step process to verify the accuracy of this information, incorporating at least three different hallucination detection strategies discussed in this module. What specific red flags might indicate hallucination in technical statistical claims?
+                        </p>
+                    </div>
+                    
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 2</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            A student in your class with learning disabilities has begun using an LLM to help draft essays and reports. Their work has significantly improved, but you're unsure if they're developing the necessary writing skills themselves. How would you approach this situation, balancing technological assistance with educational development? What policies or guidelines might you establish for your classroom that address this scenario while being equitable for all students?
+                        </p>
+                    </div>
+                    
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 3</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Create a classroom activity for students in your subject area that deliberately uses LLM hallucination as a teaching tool. Explain how the activity would work, what learning objectives it addresses, and how you would scaffold students' critical evaluation skills through the process. How might this activity differ for different age groups or ability levels?
+                        </p>
+                    </div>
+                    
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 4</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            You're planning to integrate LLMs into a semester-long project where students research historical events. Considering both the technical limitations regarding hallucinations and the ethical considerations discussed in this module, develop a comprehensive framework that establishes: (a) when and how students should use LLMs, (b) verification requirements for LLM-provided information, and (c) appropriate citation methods. How would you assess students' ability to appropriately leverage and critique AI-generated content?
+                        </p>
+                    </div>
+                    
+                    <div class="border-l-4 border-gray-300 pl-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-3">Question 5</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            As LLMs continue to advance, predict how the nature of hallucinations might evolve over the next 2-5 years and what new detection methods might emerge. Then, reflect on how these changes might require educators to adapt their approaches to digital literacy instruction. What core cognitive skills will become more important for students to develop in response to increasingly sophisticated LLMs?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <section class="text-center">
+            <div class="bg-white border border-gray-200 p-8">
+                <p class="text-gray-600 mb-4">Course Complete</p>
+                <a href="index.html" class="inline-block bg-gray-800 text-white px-8 py-3 hover:bg-gray-700 transition-colors">
+                    ← Return to Course Overview
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-5xl mx-auto px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p class="text-center md:text-left text-gray-600 text-sm">
+                    LLM Educator Training • Professional Development in Artificial Intelligence
+                </p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-800 transition-colors">Course Homepage</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
