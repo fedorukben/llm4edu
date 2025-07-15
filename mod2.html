@@ -110,7 +110,7 @@
                 <!-- Chain-of-Thought -->
                 <div class="bg-white border border-gray-200">
                     <button onclick="toggleDropdown('cot')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
-                        <h3 class="text-xl font-medium text-gray-900">Chain-of-Thought Prompting</h3>
+                        <h3 class="text-xl font-medium text-gray-900">Chain-of-Thought (CoT)</h3>
                         <svg id="cot-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -135,6 +135,88 @@
                                 <p><strong>LLM:</strong> I'll solve this step-by-step: Step 1: First, I need to find the total number of marbles in the bag. Total marbles = 5 blue + 3 red + 7 green = 15 marbles. Step 2: Now I'll calculate the probability of drawing a green marble on the first draw. P(first marble is green) = number of green marbles / total marbles. P(first marble is green) = 7/15. Step 3: After drawing the first green marble, the bag now contains: 5 blue marbles, 3 red marbles, and 6 green marbles (since one green marble was removed). Total marbles remaining = 14. Step 4: Calculate the probability of drawing a green marble on the second draw, given that the first was green. P(second marble is green | first marble was green) = remaining green marbles / remaining total marbles). P(second marble is green | first marble was green) = 6/14 = 3/7. Step 5: To find the probability of both events occurring (drawing 2 green marbles in sequence), I multiply the individual probabilities. P(both marbles are green) = P(first marble is green) × P(second marble is green | first marble was green). P(both marbles are green) = 7/15 × 3/7 = 21/105 = 1/5 = 0.2 or 20%. Therefore, the probability of randomly drawing 2 green marbles without replacement is 1/5 or 0.2 (20%).</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Tree of Thought -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('treeofthought')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Tree of Thought (ToT)</h3>
+                        <svg id="treeofthought-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="treeofthought" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Tree of Thought (ToT) extends Chain-of-Thought prompting by exploring multiple reasoning paths simultaneously, like branches on a tree. Instead of following a single line of reasoning, ToT generates several possible "thoughts" or reasoning steps at each stage, evaluates them, and selects the most promising ones to continue. This approach allows the LLM to backtrack from dead ends and explore alternative solutions, making it particularly effective for complex problems that require strategic planning or have multiple valid approaches.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Chain-of-Thought Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> Plan a 3-day trip to Paris with a $500 budget.</p>
+                                <p><strong>LLM:</strong> I'll plan this step by step. Day 1: Visit the Eiffel Tower and nearby cafes ($50 for food). Day 2: Louvre Museum ($15 entry) and walk along Seine ($30 for food). Day 3: Montmartre and Sacré-Cœur (free) with lunch ($25). Accommodation: Budget hostel at $40/night = $120. Total: $240. This leaves $260 for transportation and miscellaneous expenses.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Tree of Thought Example:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>Step 1 - Generate Options:</strong></p>
+                                <p>• Option A: Focus on free attractions and cheap food</p>
+                                <p>• Option B: Mix of paid attractions with budget accommodations</p>
+                                <p>• Option C: Splurge on one expensive experience, save elsewhere</p>
+                                <p><strong>Step 2 - Evaluate Options:</strong> Option B provides the best balance of experiences within budget.</p>
+                                <p><strong>Step 3 - Develop Chosen Path:</strong> Day 1: Eiffel Tower area ($50). Day 2: Louvre ($15) + Seine walk ($30). Day 3: Free Montmartre + budget lunch ($25). Hostel: $120. Transportation: $100. Remaining: $160 for flexibility.</p>
+                                <p><strong>LLM:</strong> Based on exploring multiple approaches, Option B offers the optimal Paris experience within your $500 budget, providing a mix of iconic paid attractions and free cultural experiences.</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-700 leading-relaxed mt-6">
+                            ToT is especially useful for problems requiring strategic thinking, creative problem-solving, or situations where there are multiple valid approaches. By considering several possibilities before committing to one path, it often finds better solutions than linear reasoning.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Graph of Thought -->
+                <div class="bg-white border border-gray-200">
+                    <button onclick="toggleDropdown('graphofthought')" class="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50">
+                        <h3 class="text-xl font-medium text-gray-900">Graph of Thought (GoT)</h3>
+                        <svg id="graphofthought-icon" class="w-5 h-5 text-gray-500 transform transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="graphofthought" class="hidden border-t border-gray-200 p-6">
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Graph of Thought (GoT) goes beyond the tree structure by allowing thoughts to connect in a network-like pattern, similar to how ideas connect in our minds. Unlike Tree of Thought where each branch splits but doesn't reconnect, GoT allows different reasoning paths to merge, share insights, and build upon each other. This creates a more flexible and interconnected reasoning process where insights from one path can inform and improve other paths, leading to more comprehensive and refined solutions.
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 mb-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Tree of Thought Approach:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>User:</strong> How can we reduce plastic waste in our community?</p>
+                                <p><strong>Path A:</strong> Focus on recycling programs → Improve sorting → Better facilities</p>
+                                <p><strong>Path B:</strong> Reduce plastic use → Alternative materials → Education campaigns</p>
+                                <p><strong>Path C:</strong> Policy changes → Plastic bag bans → Business regulations</p>
+                                <p><strong>Result:</strong> Choose one path based on evaluation, but lose insights from other paths.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-medium text-gray-900 mb-3">Graph of Thought Approach:</h4>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <p><strong>Connected Reasoning:</strong></p>
+                                <p>• <strong>Recycling insights</strong> connect to <strong>Education</strong>: Better sorting requires public awareness</p>
+                                <p>• <strong>Alternative materials</strong> connect to <strong>Policy</strong>: Regulations can incentivize eco-friendly options</p>
+                                <p>• <strong>Business regulations</strong> connect to <strong>Recycling</strong>: Companies fund better facilities</p>
+                                <p><strong>Merged Solution:</strong> A comprehensive strategy that combines improved recycling (with public education), promotion of alternatives (supported by policy incentives), and business partnerships (encouraged by smart regulations). Each element strengthens the others.</p>
+                                <p><strong>LLM:</strong> By connecting these approaches, we create a multi-layered solution where recycling programs, alternative materials, education, and policy work together synergistically for maximum impact.</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-700 leading-relaxed mt-6">
+                            GoT excels at complex, multi-faceted problems where different aspects are interconnected. It's particularly valuable for creative brainstorming, comprehensive planning, and situations where the best solution combines insights from multiple approaches rather than choosing just one.
+                        </p>
                     </div>
                 </div>
 
